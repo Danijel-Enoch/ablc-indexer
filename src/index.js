@@ -19,8 +19,8 @@ function listenToEvent() {
   const listener = new ethers.Contract(contractAddress, abi, wsProvider);
     console.info("Indexer Started")
   listener.on("OrderCreated", async (Oid, orderType, tokenA, tokenB, baseAmount, quoteAmount,creator, event) => {
-    const cBaseAmount=tokeA==="0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"|| tokenA==="0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" || tokenA==="0x55d398326f99059fF775485246999027B3197955"?convert(baseAmount):parseFloat(baseAmount.toString()) / 100000000
-    const cquoteAmount=tokeA==="0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"|| tokenA==="0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" || tokenA==="0x55d398326f99059fF775485246999027B3197955"?convert(quoteAmount):parseFloat(baseAmount.toString()) / 100000000
+    const cBaseAmount=tokenA==="0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"|| tokenA==="0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" || tokenA==="0x55d398326f99059fF775485246999027B3197955"?convert(baseAmount):parseFloat(baseAmount.toString()) / 100000000
+    const cquoteAmount=tokenA==="0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"|| tokenA==="0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" || tokenA==="0x55d398326f99059fF775485246999027B3197955"?convert(quoteAmount):parseFloat(baseAmount.toString()) / 100000000
     const buy="buy"
     console.log({ Oid, orderType, tokenA, tokenB, cBaseAmount, cquoteAmount,creator },{event})
     await OrderCreated.create({ Oid, orderType, tokenA, tokenB, baseAmount:cBaseAmount, quoteAmount:cquoteAmount,creator,tx:"false" })
